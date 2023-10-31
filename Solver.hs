@@ -1,7 +1,7 @@
 
 --Data
 data Color = Yellow | Red deriving (Show, Eq)
-data Winner = Tie | Winner Color deriving (Show, Eq)
+data Winner = Tie | Win Color deriving (Show, Eq)
 
 
 
