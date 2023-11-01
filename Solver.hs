@@ -19,7 +19,7 @@ type Game = (Board, Color)
 
 -- Functions
 --
-findWinner :: Game -> Winner
+findWinner :: Game -> Maybe Winner
 findWinner = undefined
 
 updateBoard :: Game -> Move -> Game
