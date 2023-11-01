@@ -22,8 +22,8 @@ type Game = (Board, Color)
 findWinner :: Game -> Winner
 findWinner = undefined
 
-gameResult :: Game -> Move -> Game
-gameResult = undefined
+updateBoard :: Game -> Move -> Game
+updateBoard = undefined
 
 allowedMoves :: Game -> [Move]
 allowedMoves = undefined
