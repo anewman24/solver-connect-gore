@@ -28,15 +28,10 @@ updateBoard = undefined
 allowedMoves :: Game -> [Move]
 allowedMoves = undefined
 
-showBoard :: Game -> String
-showBoard =
-
-
 showCell :: Color -> String
 showCell Yellow = "[y]"
 showCell Red = "[r]"
 showCell _ = "[ ]"
-
 
 showBoard :: Game -> String
 showBoard (board, currentPlayer) = unlines (header : rowStrings)
