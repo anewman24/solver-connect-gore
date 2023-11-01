@@ -1,4 +1,4 @@
-
+import Data.List
 --Data
 data Color = Yellow | Red deriving (Show, Eq)
 data Winner = Tie | Win Color deriving (Show, Eq)
@@ -29,4 +29,19 @@ allowedMoves :: Game -> [Move]
 allowedMoves = undefined
 
 showBoard :: Game -> String
-showBoard = undefined
+showBoard =
+
+
+showCell :: Color -> String
+showCell Yellow = "[y]"
+showCell Red = "[r]"
+showCell _ = "[ ]"
+
+
+showBoard :: Game -> String
+showBoard (board, currentPlayer) = unlines (header : rowStrings)
+  where
+    header = "  1  2  3  4  5  6  7"
+    rowStrings = map (intercalate "|" . map (showCell)) boardRows
+    boardRows = take 6 (transpose (map (take 6) board ++ repeat []))
+
