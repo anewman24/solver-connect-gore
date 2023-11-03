@@ -46,5 +46,15 @@ allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
                         in 
                            [col | (left,col) <- zipSpots, left /= 0]  
 
+showCell :: Color -> String
+showCell Yellow = "[y]"
+showCell Red = "[r]"
+showCell _ = "[ ]"
+
 showBoard :: Game -> String
-showBoard = undefined
+showBoard (board, currentPlayer) = unlines (header : rowStrings)
+  where
+    header = "  1  2  3  4  5  6  7"
+    rowStrings = map (intercalate "|" . map (showCell)) boardRows
+    boardRows = take 6 (transpose (map (take 6) board ++ repeat []))
+
