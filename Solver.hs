@@ -22,11 +22,14 @@ type Game = (Board, Color)
 findWinner :: Game -> Maybe Winner
 findWinner = undefined
 
-updateBoard :: Game -> Move -> Game
+updateBoard :: Game -> Move -> Game 
 updateBoard = undefined
-
+-- sampleboard = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
 allowedMoves :: Game -> [Move]
-allowedMoves = undefined
+allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
+                         zipSpots = zip (spotsLeft) [0..6]
+                        in 
+                           [col | (left,col) <- zipSpots, left /= 0]  
 
 showBoard :: Game -> String
 showBoard = undefined
