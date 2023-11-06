@@ -2,7 +2,7 @@ import Data.List
 
 --Data
 -- Color represents which color the move is. It also acts as the signifier for the player
-data Color = Yellow | Red deriving (Show, Eq)
+data Color = Empty | Yellow | Red deriving (Show, Eq)
 
 -- Winner is the two main possible outcomes: when the game is a tie and when one of the players wins 
 data Winner = Tie | Win Color deriving (Show, Eq)
@@ -23,7 +23,7 @@ type Move = Int
 type Game = (Board, Color)
 
 sampleboard = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
-
+otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 -- Functions
 --
 findWinner :: Game -> Maybe Winner
@@ -61,13 +61,16 @@ allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
 showCell :: Color -> String
 showCell Yellow = "[y]"
 showCell Red = "[r]"
-showCell _ = "[ ]"
-
--- Converts a given game into a string that can print onto GHCI or cmd line
 showBoard :: Game -> String
 showBoard (board, currentPlayer) = unlines (header : rowStrings)
   where
     header = "  1  2  3  4  5  6  7"
-    rowStrings = map (intercalate "|" . map (showCell)) boardRows
-    boardRows = take 6 (transpose (map (take 6) board ++ repeat []))
+    paddedBoard = padColumns 7 board
+    rowStrings = map (intercalate "|" . map (showCell)) (transpose paddedBoard)
+
+padColumns :: Int -> Board -> Board
+padColumns n board = map (padTo n) board
+
+padTo :: Int -> [Color] -> [Color]
+padTo n xs = take n (xs ++ repeat Empty)
 
