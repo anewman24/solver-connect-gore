@@ -33,21 +33,23 @@ verticalWin Yellow col = aux col 0
 
 
 
-horizonalWinBoard :: Color -> Column -> Column -> Column -> Column -> Bool
-horizonalWinBoard Red (w:x:y:z:as) = aux (w:x:y:z:as) 0
-    where aux (w:x:y:z:as) 4 = True
-          aux [] num = False
-          aux  (w:x:y:z:as) num = 
-            aux (reverse w) (reverse x) (reverse y) (reverse z) (num + 1) 
-            aux (reverse x) (reverse y) (reverse z) (reverse as) 0
+horizonalWinBoard :: Color -> Board -> Bool
+horizonalWinBoard Red (w:x:y:z:as) = 
+    (aux (reverse w) (reverse x) (reverse y) (reverse z)) 
+    || aux (reverse x) (reverse y) (reverse z) reverse a <- (a:as)
+    where aux [] [] [] [] = False
+          aux (Red:ws) (Red:xs) (Red:ys) (Red:zs) = True
+          aux (_:ws) (_:xs) (_:ys) (_:zs) = aux ws xs ys zs
+            
 
-horizonalWinBoard Yellow board totalnum = aux board 0
-    where aux board 4 = True
-          aux [[]] totalnum = False
-          aux ((x:xs):ys) num = 
-            if x == Yellow
-                then aux ys (totalnum + 1)
-                else aux ys 0
+
+--horizonalWinBoard Yellow board = aux board 
+   --where aux board 4 = True
+          --aux [[]] totalnum = False
+          --aux ((x:xs):ys) num = 
+            --if x == Yellow
+                --then aux ys (totalnum + 1)
+                --else aux ys 0
           
 
 digonalWin :: Color -> Board -> Int -> Bool
@@ -57,10 +59,9 @@ digonalWin = undefined
 findWinner :: Game -> Maybe Winner
 findWinner _ = Nothing
 findWinner (board, currentPlayer) = 
-    where board = ((x:xs):ys)
     if currentPlayer == Red 
-        then verticalWin Yellow (x:xs) || horizonalWinBoard Yellow ((x:xs):ys) || digonalWin Yellow ((x:xs):ys)
-        else verticalWin Red (x:xs) || horizonalWinBoard Red ((x:xs):ys) || digonalWin Red ((x:xs):ys)
+        then verticalWin Yellow y || horizonalWinBoard Yellow (w:u:x:y:ys) || digonalWin Yellow (y:ys) 
+        else verticalWin Red y || horizonalWinBoard Red (y:ys) || digonalWin Red (y:ys)
 
 
    
