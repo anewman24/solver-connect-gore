@@ -24,6 +24,9 @@ type Game = (Board, Color)
 
 sampleboard = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
 otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
+
+-- when printing (such as in ghci) use putStrLn (showBoard <board>)
+
 -- Functions
 --
 findWinner :: Game -> Maybe Winner
