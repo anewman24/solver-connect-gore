@@ -30,7 +30,8 @@ mostmoves= 42
 
 -- Idea is to have board and which player's turn it is (maybe include number of moves?)
 --type Game = (Board, Color)
-gametime = (board1, Red)
+gametime = (emptyBoard, Red)
+games = (board1 Yellow)
 
 
 -- Functions
@@ -38,13 +39,40 @@ gametime = (board1, Red)
 
 --findWinner :: Game -> Maybe Winner
 
+
+--swapColor :: Color -> Color
+swapColor Red
+swapColor Yellow
+
+--Takes a board, a move, and a color and returns a updated board
+--makeNewBoard :: Board -> Move -> Color -> Board
+makeNewBoard board1 midmove Red
+makeNewBoard emptyBoard begmove Yellow
+
+--Given a Game and a Move, creates a new Game with the result of the given Move. Will return a new Game or if the Move is not valid; will return Nothing.
 --updateBoard :: Game -> Move -> Game
+updateBoard gametime begmove
 
 
+--Creates a list of possible moves, returns a list of the 
 --allowedMoves :: Game -> [Move]
+allowedMoves gametime
+allowedMoves games
 
+
+--Converts a Color type into its String representation
+--showCell :: Color -> String
+showCell Yellow
+showCell Red
 
 --showBoard :: Game -> String
+showBoard gametime
+showBoard games
+
+--padColumns :: Int -> Board -> Board
+
+
+--padTo :: Int -> [Color] -> [Color]
 
 
 
