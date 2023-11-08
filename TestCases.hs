@@ -20,6 +20,12 @@ emptyBoard = [[]]
 --or emptyBoard = []
 board1 = [column1, column2, column2, column1 almostcolumn,column1, column2]
 badBoard = [column1, column2, badcolumn, column1, almostcolumn, column2 badcolumn]
+sampleboard = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],
+                [Yellow, Red, Red,Yellow],[]],Red)
+
+
+otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],
+               [Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 
 
 --type Move = Int
