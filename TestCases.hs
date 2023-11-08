@@ -1,5 +1,5 @@
-module TestCases where
-import Solver
+module TestCases where 
+  import Solver
 
 {- 
 data Color = Empty | Yellow | Red deriving (Show, Eq)
