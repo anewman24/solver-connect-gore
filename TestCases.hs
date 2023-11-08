@@ -79,10 +79,3 @@ showBoard games
 
 
 --padTo :: Int -> [Color] -> [Color]
-
-
-
-
-
-
-
