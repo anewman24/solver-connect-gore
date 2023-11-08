@@ -2,7 +2,7 @@ module TestCases where
   import Solver
 
 {- 
-data Color = Yellow | Red deriving (Show, Eq)
+data Color = Empty | Yellow | Red deriving (Show, Eq)
 data Winner = Tie | Win Color deriving (Show, Eq)
 -}
 
@@ -11,7 +11,7 @@ emptyColumn = []
 column1 = [Red, Yellow, Yellow, Red, Red, Red]
 column2 = [Yellow, Yellow, Red, Red, Yellow, Yellow]
 badcolumn = [Yellow, Red, Red, Yellow, Yellow, Red, Red]
-almostcolumn = [Red, Yellow, Red, Red]
+almostcolumn = [Red, Yellow, Red, Red, Empty, Empty]
 
 
 
