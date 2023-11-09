@@ -44,17 +44,18 @@ horizonalWinBoard col (w:x:y:z:as) =
 horizonalWinBoard col columns = False
 
 
-digonalWinRight :: Color -> Board -> Bool
-digonalWinRight col (w:x:y:z:as) = 
+digonalWintoRight :: Color -> Board -> Bool
+digonalWintoRight col (w:x:y:z:as) = 
     aux (reverse w) (reverse x) (reverse y) (reverse z) 
-    || digonalWinRight col (x:y:z:as)
+    || digonalWintoRight col (x:y:z:as)
     where aux [] [] [] [] = False
           aux (w:ws) (x:xs) (y:ys) (z:zs) = 
-            if w == col
-                then aux w xs ys zs 
-                else aux ws xs ys zs
+           all ( < 2) (length w && length x && length y && length z) 
+           || aux (w:ws) (x1:x2:xs) (y1:y2:y3:ys) (z1:z2:z3:z4:zs)  
+          aux (w:ws) (x1:x2:xs) (y1:y2:y3:ys) (z1:z2:z3:z4:zs) 
+            = all (==col) [w,x2,y3,z4] || aux ws xs ys zs
 
-digonalWinRight col colums = False
+digonalWintoRight col colums = False
 
 diagonalWinLeft :: Color -> Board -> Bool
 diagonalWinLeft = undefined
