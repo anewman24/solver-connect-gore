@@ -64,6 +64,7 @@ allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
 showCell :: Color -> String
 showCell Yellow = "[y]"
 showCell Red = "[r]"
+showCell Empty = "[ ]"
 showBoard :: Game -> String
 showBoard (board, currentPlayer) = unlines (header : rowStrings)
   where
