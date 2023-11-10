@@ -5,7 +5,7 @@ module Solver where
 
 --Data
 -- Color represents which color the move is. It also acts as the signifier for the player
-data Color = Empty | Yellow | Red deriving (Show, Eq)
+data Color = Nothing | Yellow | Red deriving (Show, Eq)
 
 -- Winner is the two main possible outcomes: when the game is a tie and when one of the players wins 
 data Winner = Tie | Win Color deriving (Show, Eq)
@@ -74,7 +74,7 @@ updateBoard game move =
          in Just (newBoard, swapColor color)
     else Nothing
 
--- Creates a list of possible moves, returns a list of the 
+-- Creates a list of possible moves, returns a list of the legal moves
 allowedMoves :: Game -> [Move]
 allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
                          zipSpots = zip (spotsLeft) [0..6]
@@ -87,9 +87,10 @@ allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
 -}
 
 -- Converts a Color type into its String representation
-showCell :: Color -> String
-showCell Yellow = "[y]"
-showCell Red = "[r]"
+showCell :: Maybe Color -> String
+showCell Just Yellow = "[y]"
+showCell Just Red = "[r]"
+showCell Nothing = "[ ]"
 
 showBoard :: Game -> String
 showBoard (board, currentPlayer) = unlines (header : rowStrings)
