@@ -1,4 +1,5 @@
-import Data.List
+module Solver where 
+    import Data.List
 
 --Data
 -- Color represents which color the move is. It also acts as the signifier for the player
