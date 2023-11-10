@@ -1,5 +1,7 @@
+
 module Solver where 
     import Data.List
+
 
 --Data
 -- Color represents which color the move is. It also acts as the signifier for the player
@@ -23,8 +25,12 @@ sampleColumn7 = []
 
 -- Board will have 7 columns at max and each can be accessed with the respective number 0-6
 type Board = [Column]
+
 sampleboard = [sampleColumn1, sampleColumn2, sampleColumn3, sampleColumn4, sampleColumn5, sampleColumn6, sampleColumn7]
 emptyboard = [[]]
+
+
+
 -- Move represents the index of the column to be accessed, will be between 0 and 6 
 type Move = Int
 
@@ -34,6 +40,11 @@ sampleGame = (sampleboard, Red)
 startGame = (emptyboard, Red)
 
 --otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
+
+
+sampleboard = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
+otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
+
 
 -- when printing (such as in ghci) use putStrLn (showBoard <board>)
 
@@ -70,13 +81,16 @@ allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
                         in 
                            [col | (left,col) <- zipSpots, left /= 0]  
 
+
 {- allowedMoves sampleGame = [0, 1, 2, 4, 5, 6]
        I guess that means it works but what does it mean?
 -}
+
 -- Converts a Color type into its String representation
 showCell :: Color -> String
 showCell Yellow = "[y]"
 showCell Red = "[r]"
+
 showBoard :: Game -> String
 showBoard (board, currentPlayer) = unlines (header : rowStrings)
   where
