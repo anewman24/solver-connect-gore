@@ -46,24 +46,39 @@ horizonalWinBoard col columns = False
 
 digonalWintoRight :: Color -> Board -> Bool
 digonalWintoRight col (w:x:y:z:as) = 
-    aux (reverse w) (reverse x) (reverse y) (reverse z) 
+    aux (reverse w) (drop 1 $ reverse x) (drop 2 $ reverse y) (drop 3 $ reverse z) 
     || digonalWintoRight col (x:y:z:as)
-    where aux [] [] [] [] = False
+    where aux _ _ _ _ = False
           aux (w:ws) (x:xs) (y:ys) (z:zs) = 
-           all ( < 2) (length w && length x && length y && length z) 
-           || aux (w:ws) (x1:x2:xs) (y1:y2:y3:ys) (z1:z2:z3:z4:zs)  
-          aux (w:ws) (x1:x2:xs) (y1:y2:y3:ys) (z1:z2:z3:z4:zs) 
-            = all (==col) [w,x2,y3,z4] || aux ws xs ys zs
+            all (==col) [w,x,y,z] || aux ws xs ys zs
 
 digonalWintoRight col colums = False
 
 diagonalWinLeft :: Color -> Board -> Bool
-diagonalWinLeft = undefined
+diagonalWinLeft col (w:x:y:z:as) =
+    aux (drop 3 $ reverse w) (drop 2 $ reverse x) (drop 1 $ reverse y) (reverse z)
+    || diagonalWinLeft col (x:y:z:as)
+    where aux _ _ _ _ = False
+          aux (w:ws) (x:xs) (y:ys) (z:zs) = 
+            all (==col) [w,x,y,z] || aux ws xs ys zs
 
+digonalWintoLeft col colums = False
+
+opposite :: Color -> Color
+opposite Red = Yellow
+opposite Yellow = Red
 
 findWinner :: Game -> Maybe Winner
 findWinner _ = Nothing
-findWinner (board, currentPlayer) = undefined
+findWinner (board, currentPlayer) 
+    case opposite currentPlayer of
+        | (verticalWin (opposite currentPlayer) board) == True = Winner opposite currentPlayer
+        | (horizonalWinBoard (opposite currentPlayer) board) == True = Winner opposite currentPlayer
+        | (diagonalWinLeft (opposite currentPlayer) board) == True = Winner opposite currentPlayer
+        | (diagonalWintoRight (opposite currentPlayer) board) == True = Winner opposite currentPlayer
+        
+
+
     --    if (verticalWin (opposite player) board) then Winner (opposite player) else Tie
 
 
