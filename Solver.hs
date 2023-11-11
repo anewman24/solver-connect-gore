@@ -71,12 +71,20 @@ opposite Yellow = Red
 findWinner :: Game -> Maybe Winner
 findWinner _ = Nothing
 findWinner (board, currentPlayer) 
-    case opposite currentPlayer of
-        | (verticalWin (opposite currentPlayer) board) == True = Winner opposite currentPlayer
-        | (horizonalWinBoard (opposite currentPlayer) board) == True = Winner opposite currentPlayer
-        | (diagonalWinLeft (opposite currentPlayer) board) == True = Winner opposite currentPlayer
-        | (diagonalWintoRight (opposite currentPlayer) board) == True = Winner opposite currentPlayer
-        
+        | (verticalWin (opposite currentPlayer) board) == True = Just $ Winner opposite currentPlayer
+        | (horizonalWinBoard (opposite currentPlayer) board) == True = Just $ Winner opposite currentPlayer
+        | (diagonalWinLeft (opposite currentPlayer) board) == True = Just $ Winner opposite currentPlayer
+        | (diagonalWintoRight (opposite currentPlayer) board) == True = Just $ Winner opposite currentPlayer
+        | (verticalWin (currentPlayer) board) == True = Just $ Winner currentPlayer
+        | (horizonalWinBoard (currentPlayer) board) == True = Just $ Winner currentPlayer
+        | (diagonalWinLeft (currentPlayer) board) == True = Just $ Winner currentPlayer
+        | (diagonalWintoRight (currentPlayer) board) == True = Just $ Winner currentPlayer
+        | otherwise  = Just Tie
+    --where currentPlayer == Red 
+
+    
+    
+
 
 
     --    if (verticalWin (opposite player) board) then Winner (opposite player) else Tie
