@@ -1,11 +1,11 @@
 
 module Solver where 
-    import Data.List
+import Data.List
 
 
 --Data
 -- Color represents which color the move is. It also acts as the signifier for the player
-data Color = Nothing | Yellow | Red deriving (Show, Eq)
+data Color = Yellow | Red deriving (Show, Eq)
 
 -- Winner is the two main possible outcomes: when the game is a tie and when one of the players wins 
 data Winner = Tie | Win Color deriving (Show, Eq)
@@ -42,8 +42,8 @@ startGame = (emptyboard, Red)
 --otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 
 
-sampleboard = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
-otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
+board2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
+otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[]],Red)
 
 
 -- when printing (such as in ghci) use putStrLn (showBoard <board>)
@@ -88,8 +88,8 @@ allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
 
 -- Converts a Color type into its String representation
 showCell :: Maybe Color -> String
-showCell Just Yellow = "[y]"
-showCell Just Red = "[r]"
+showCell (Just Yellow) = "[y]"
+showCell (Just Red) = "[r]"
 showCell Nothing = "[ ]"
 
 showBoard :: Game -> String
@@ -102,6 +102,6 @@ showBoard (board, currentPlayer) = unlines (header : rowStrings)
 padColumns :: Int -> Board -> Board
 padColumns n board = map (padTo n) board
 
-padTo :: Int -> [Color] -> [Color]
-padTo n xs = take n (xs ++ repeat Empty)
+padTo :: Int -> [Color] -> [Maybe Color]
+padTo n xs = take n (xs ++ repeat Nothing)
 
