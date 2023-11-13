@@ -101,7 +101,7 @@ findWinner :: Game -> Maybe Winner
 findWinner (board, currentPlayer) 
        | anyWin Red board = Just $ Win Red 
        | anyWin Yellow board = Just $ Win Yellow
-       | otherwise == null (allowedMoves (board, currentPlayer)) = Just $ Tie
+       | otherwise  = Just $ Tie
     
 anyWin currentPlayer board = 
            verticalWinBoard currentPlayer board
