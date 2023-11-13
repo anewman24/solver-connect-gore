@@ -29,18 +29,6 @@ verticalWinBoard color (a:as) = aux (reverse a) 0
             |otherwise = aux xs 0 
           
 
--- verticalWin:: Color -> Column -> Bool
--- verticalWin Red col = aux col 0
-    -- where aux _ 4 = True
-          -- aux [] num = False
-          -- aux (Red:xs) num = aux xs (num + 1)
-          -- aux (Yellow:xs) num = aux xs 0
--- verticalWin Yellow col = aux col 0
-    -- where aux _ 4 = True
-          -- aux [] num = False
-          -- aux (Yellow:xs) num = aux xs (num + 1)
-          -- aux (Red:xs) num = aux xs 0
-
 
 
 horizonalWinBoard :: Color -> Board -> Bool
@@ -90,17 +78,6 @@ anyWin currentPlayer board =
         || diagonalWinLeft currentPlayer board 
         || digonalWintoRight currentPlayer board
     
-
-
-
-    --    if (verticalWin (opposite player) board) then Winner (opposite player) else Tie
-
-
-
-    --case board of
-    --[] -> Just $ Win Yellow
-    --[]-> Just $ Win Red
-    --[] -> Just $ Tie
 
 
 updateBoard :: Game -> Move -> Game
