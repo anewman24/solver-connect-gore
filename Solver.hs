@@ -1,6 +1,6 @@
 
 module Solver where 
-    import Data.List
+import Data.List
 
 
 --Data
@@ -42,7 +42,7 @@ startGame = (emptyboard, Red)
 --otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 
 
-sampleboard = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
+sampleboard2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
 otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 
 
@@ -101,7 +101,7 @@ findWinner :: Game -> Maybe Winner
 findWinner (board, currentPlayer) 
        | anyWin Red board = Just $ Win Red 
        | anyWin Yellow board = Just $ Win Yellow
-       | otherwise = Just Tie
+       | otherwise == null (allowedMoves (board, currentPlayer)) = Just $ Tie
     
 anyWin currentPlayer board = 
            verticalWinBoard currentPlayer board
