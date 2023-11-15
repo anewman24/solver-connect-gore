@@ -1,6 +1,6 @@
 
 module Solver where 
-    import Data.List
+import Data.List
 
 
 --Data
@@ -33,6 +33,13 @@ emptyboard = [[]]
 
 -- Move represents the index of the column to be accessed, will be between 0 and 6 
 type Move = Int
+move1 = 0
+move2 = 1
+move3 = 2
+move4 = 3
+move5 = 4
+move6 = 5
+move7 = 6
 
 -- Idea is to have board and which player's turn it is (maybe include number of moves?)
 type Game = (Board, Color)
@@ -42,8 +49,8 @@ startGame = (emptyboard, Red)
 --otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 
 
-sampleboard = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
-otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
+--sampleboard = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
+--otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 
 
 -- when printing (such as in ghci) use putStrLn (showBoard <board>)
