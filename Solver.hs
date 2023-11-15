@@ -62,7 +62,7 @@ startGame = (emptyboard, Red)
 
 
 sampleboard2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
---otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
+
 
 
 -- when printing (such as in ghci) use putStrLn (showBoard <board>)
@@ -103,8 +103,7 @@ findWinner (board, currentPlayer)
        | anyWin Yellow board = Just $ Win Yellow
        | null(allowedMoves (board,currentPlayer)) = Just $ Tie 
        | otherwise = Nothing
-        
-
+ 
     
 anyWin currentPlayer board = 
            verticalWinBoard currentPlayer board
