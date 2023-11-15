@@ -38,6 +38,14 @@ board5 = [[],[Red],[Red,Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Y
 --diagonalWin for Yellow on board 5 (right diagonal)
 board6 = [[],[Yellow],[Yellow,Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Yellow,Red],[Red,Yellow,Red,Yellow,Yellow],[]]
 --diagonalWin for Red on board 6 (right diagonal)
+board7 = reverse board5
+--diagonalWin for Yellow on board 7 (left diagonal)
+board8 = reverse board6
+--diagonalWin for Red on board 8 (left diagonal)
+board9 = []
+-- Tie test
+board10 =[[],[Red],[Red,Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Red,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
+--Nothing Test
 
 
 -- Move represents the index of the column to be accessed, will be between 0 and 6 
