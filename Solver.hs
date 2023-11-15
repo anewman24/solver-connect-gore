@@ -30,10 +30,12 @@ sampleboard = [sampleColumn1, sampleColumn2, sampleColumn3, sampleColumn4, sampl
 emptyboard = [[]]
 board1 = [[],[Red],[Yellow,Red,Yellow,Red],[Red,Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
 --Vertical win for yellow on board 1
-board2 = [[],[Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow],[]]
+board2 = [[],[Yellow],[Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow],[]]
 --Vertical win for Red on board 2 
-board3 = []
-board4 =[]
+board3 = [[],[Red],[Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[Red,Yellow]]
+-- horizontal win for red on board 3
+board4 =[[],[Yellow],[Red,Yellow,Red,Yellow],[Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow],[Yellow,Red]]
+-- horizontal win for yellow on board 4
 board5 = [[],[Red],[Red,Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Red,Yellow],[Yellow,Red,Yellow,Red,Red],[]]
 --diagonalWin for Yellow on board 5 (right diagonal)
 board6 = [[],[Yellow],[Yellow,Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Yellow,Red],[Red,Yellow,Red,Yellow,Yellow],[]]
@@ -42,7 +44,7 @@ board7 = reverse board5
 --diagonalWin for Yellow on board 7 (left diagonal)
 board8 = reverse board6
 --diagonalWin for Red on board 8 (left diagonal)
-board9 = []
+board9 = [[],[Yellow,Red],[Yellow,Red,Yellow,Red,Yellow,Red],[Red,Yellow,Yellow,Yellow,Red,Red],[Red,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
 -- Tie test
 board10 =[[],[Red],[Red,Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Red,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
 --Nothing Test
@@ -81,9 +83,9 @@ verticalWinBoard color [] = False
 
 winAcross :: Color -> Board -> Bool
 winAcross col (w:x:y:z:as) = 
-    aux (reverse w) (reverse x) (reverse y) (reverse z)
-    || aux (drop 3 $ reverse w) (drop 2 $ reverse x) (drop 1 $ reverse y) (reverse z)
-    || aux (reverse w) (drop 1 $ reverse x) (drop 2 $ reverse y) (drop 3 $ reverse z) 
+    aux (reverse w) (reverse x) (reverse y) (reverse z) --Horizontal check
+    || aux (drop 3 $ reverse w) (drop 2 $ reverse x) (drop 1 $ reverse y) (reverse z) --Diagonal left check
+    || aux (reverse w) (drop 1 $ reverse x) (drop 2 $ reverse y) (drop 3 $ reverse z) --Diagonal right check 
     || winAcross col (x:y:z:as)
     where aux (w:ws) (x:xs) (y:ys) (z:zs) = 
             all (==col) [w,x,y,z] || aux ws xs ys zs
