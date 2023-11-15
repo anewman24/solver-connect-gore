@@ -21,18 +21,26 @@ loadGame :: FilePath -> IO Game
 loadGame path = 
     do contents <- (readFile path) -- gives whole file as a string
        let (g:gs) = lines contents -- creates a list where each newline is a string
-       
+
+
 readGame :: String -> Game
 
 -- 
 showGame :: Game -> String
 showGame game = 
     let (board, color) = game
-    in 
+        colorString = colorToString color
+        lstColumns = unlines (convertBoard board)
+    in colorString: "\n" ++ lstColumns
 
 -- Converts a board to a list of Strings, with each color as it's string representation
+-- Board = [[String]]
 convertBoard :: Board -> [String]
-convertBoard board = map (colorToString) 
+convertBoard board = 
+    let strBoard = [if null column then column else map (colorToString) column | column <- Board ]
+        lstLines = [ (replicate (7- length col) "0") ++ col | col <- strBoard ]
+    in [unwords line | line <- lstLines]
+
 
 -- Converts a color to it's string representation
 colorToString :: Color -> String
