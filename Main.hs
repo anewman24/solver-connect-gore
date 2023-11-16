@@ -4,6 +4,7 @@ import TestCases
 
 import System.Environment
 import System.IO
+import GHC.Base (undefined)
 
 main :: IO ()
 main =
@@ -22,8 +23,9 @@ loadGame path =
     do contents <- (readFile path) -- gives whole file as a string
        let (g:gs) = lines contents -- creates a list where each newline is a string
 
-
+--Takes a string in a text format and return the corresponding game
 readGame :: String -> Game
+readGame str = undefined
 
 -- 
 showGame :: Game -> String
@@ -49,5 +51,11 @@ colorToString color =
         Yellow -> "1"
         Red -> "2"
 
+--Converts the string to a color
+stringtoColor :: String -> Color
+stringtoColor string = 
+    case string of
+        "1" -> Yellow
+        "2" -> Red
 
 convertToBoard :: [String] -> Board 
