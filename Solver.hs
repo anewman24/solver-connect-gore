@@ -27,7 +27,7 @@ sampleColumn7 = []
 type Board = [Column]
 
 sampleboard = [sampleColumn1, sampleColumn2, sampleColumn3, sampleColumn4, sampleColumn5, sampleColumn6, sampleColumn7]
-emptyboard = [[]]
+emptyboard = []
 
 
 
