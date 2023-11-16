@@ -99,9 +99,9 @@ showBoard (board, currentPlayer) = unlines (header : rowStrings)
     paddedBoard = padColumns 7 board
     rowStrings = map (intercalate "|" . map (showCell)) (transpose paddedBoard)
 
-padColumns :: Int -> Board -> Board
+padColumns :: Int -> Board ->  [[Maybe Color]]
 padColumns n board = map (padTo n) board
 
 padTo :: Int -> [Color] -> [Maybe Color]
-padTo n xs = take n (xs ++ repeat Nothing)
+padTo n xs = take n (map Just xs ++ repeat Nothing)
 
