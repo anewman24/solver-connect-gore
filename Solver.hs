@@ -28,7 +28,26 @@ type Board = [Column]
 
 sampleboard = [sampleColumn1, sampleColumn2, sampleColumn3, sampleColumn4, sampleColumn5, sampleColumn6, sampleColumn7]
 emptyboard = [[]]
-
+board1 = [[],[Red],[Yellow,Red,Yellow,Red],[Red,Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
+--Vertical win for yellow on board 1
+board2 = [[],[Yellow],[Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow],[]]
+--Vertical win for Red on board 2 
+board3 = [[],[Red],[Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[Red,Yellow]]
+-- horizontal win for red on board 3
+board4 =[[],[Yellow],[Red,Yellow,Red,Yellow],[Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow],[Yellow,Red]]
+-- horizontal win for yellow on board 4
+board5 = [[],[Red],[Red,Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Red,Yellow],[Yellow,Red,Yellow,Red,Red],[]]
+--diagonalWin for Yellow on board 5 (right diagonal)
+board6 = [[],[Yellow],[Yellow,Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Yellow,Red],[Red,Yellow,Red,Yellow,Yellow],[]]
+--diagonalWin for Red on board 6 (right diagonal)
+board7 = reverse board5
+--diagonalWin for Yellow on board 7 (left diagonal)
+board8 = reverse board6
+--diagonalWin for Red on board 8 (left diagonal)
+board9 = [[],[Yellow,Red],[Yellow,Red,Yellow,Red,Yellow,Red],[Red,Yellow,Yellow,Yellow,Red,Red],[Red,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
+-- Tie test
+board10 =[[],[Red],[Red,Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Red,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
+--Nothing Test
 
 
 -- Move represents the index of the column to be accessed, will be between 0 and 6 
@@ -42,16 +61,57 @@ startGame = (emptyboard, Red)
 --otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 
 
+
 board2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
 otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[]],Red)
+
 
 
 -- when printing (such as in ghci) use putStrLn (showBoard <board>)
 
 -- Functions
 --
+verticalWinBoard :: Color -> Board -> Bool
+verticalWinBoard color (a:as) = aux (reverse a) 0 
+    || verticalWinBoard color as 
+    where aux _ 4 = True
+          aux [] num = False
+          aux (x:xs) num 
+            |x == color = aux xs (num + 1)
+            |otherwise = aux xs 0 
+
+verticalWinBoard color [] = False
+
+
+winAcross :: Color -> Board -> Bool
+winAcross col (w:x:y:z:as) = 
+    aux (reverse w) (reverse x) (reverse y) (reverse z) --Horizontal check
+    || aux (drop 3 $ reverse w) (drop 2 $ reverse x) (drop 1 $ reverse y) (reverse z) --Diagonal left check
+    || aux (reverse w) (drop 1 $ reverse x) (drop 2 $ reverse y) (drop 3 $ reverse z) --Diagonal right check 
+    || winAcross col (x:y:z:as)
+    where aux (w:ws) (x:xs) (y:ys) (z:zs) = 
+            all (==col) [w,x,y,z] || aux ws xs ys zs
+          aux _ _ _ _ = False
+          
+winAcross color columns = False
+
+opposite :: Color -> Color
+opposite Red = Yellow
+opposite Yellow =  Red
+
 findWinner :: Game -> Maybe Winner
-findWinner = undefined
+findWinner (board, currentPlayer) 
+       | anyWin Red board = Just $ Win Red 
+       | anyWin Yellow board = Just $ Win Yellow
+       | null(allowedMoves (board,currentPlayer)) = Just $ Tie 
+       | otherwise = Nothing
+ 
+    
+anyWin currentPlayer board = 
+           verticalWinBoard currentPlayer board
+        || winAcross currentPlayer board
+    
+
 
 -- Takes a color and returns the opposite color
 swapColor :: Color -> Color
@@ -92,16 +152,17 @@ showCell (Just Yellow) = "[y]"
 showCell (Just Red) = "[r]"
 showCell Nothing = "[ ]"
 
-showBoard :: Game -> String
-showBoard (board, currentPlayer) = unlines (header : rowStrings)
-  where
-    header = "  1  2  3  4  5  6  7"
-    paddedBoard = padColumns 7 board
-    rowStrings = map (intercalate "|" . map (showCell)) (transpose paddedBoard)
+--showBoard :: Game -> String
+--showBoard (board, currentPlayer) = unlines (header : rowStrings)
+  --where
+    --header = "  1  2  3  4  5  6  7"
+    --paddedBoard = padColumns 7 board
+    --rowStrings = map (intercalate "|" . map (showCell)) (transpose paddedBoard)
 
 padColumns :: Int -> Board ->  [[Maybe Color]]
 padColumns n board = map (padTo n) board
 
 padTo :: Int -> [Color] -> [Maybe Color]
 padTo n xs = take n (map Just xs ++ repeat Nothing)
+
 
