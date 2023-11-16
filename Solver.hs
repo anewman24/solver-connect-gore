@@ -61,7 +61,9 @@ startGame = (emptyboard, Red)
 --otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 
 
-sampleboard2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
+
+board2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
+otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[]],Red)
 
 
 
@@ -132,7 +134,7 @@ updateBoard game move =
          in Just (newBoard, swapColor color)
     else Nothing
 
--- Creates a list of possible moves, returns a list of the 
+-- Creates a list of possible moves, returns a list of the legal moves
 allowedMoves :: Game -> [Move]
 allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
                          zipSpots = zip (spotsLeft) [0..6]
@@ -145,9 +147,10 @@ allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
 -}
 
 -- Converts a Color type into its String representation
-showCell :: Color -> String
-showCell Yellow = "[y]"
-showCell Red = "[r]"
+showCell :: Maybe Color -> String
+showCell (Just Yellow) = "[y]"
+showCell (Just Red) = "[r]"
+showCell Nothing = "[ ]"
 
 --showBoard :: Game -> String
 --showBoard (board, currentPlayer) = unlines (header : rowStrings)
@@ -156,9 +159,10 @@ showCell Red = "[r]"
     --paddedBoard = padColumns 7 board
     --rowStrings = map (intercalate "|" . map (showCell)) (transpose paddedBoard)
 
---padColumns :: Int -> Board -> Board
---padColumns n board = map (padTo n) board
+padColumns :: Int -> Board ->  [[Maybe Color]]
+padColumns n board = map (padTo n) board
 
---padTo :: Int -> [Color] -> [Color]
---padTo n xs = take n (xs ++ repeat Empty)
+padTo :: Int -> [Color] -> [Maybe Color]
+padTo n xs = take n (map Just xs ++ repeat Nothing)
+
 
