@@ -15,13 +15,6 @@ data Winner = Tie | Win Color deriving (Show, Eq)
 
 -- Column will have 6 colors at max and represents an individual column in the game
 type Column = [Color]
-sampleColumn1 = [Red, Yellow]
-sampleColumn2 = [Red,Red,Red,Red,Red]
-sampleColumn3 = []
-sampleColumn4 = [Yellow,Yellow, Yellow,Yellow,Yellow,Yellow]
-sampleColumn5 = [Red,Red,Red]
-sampleColumn6 = [Yellow, Red, Red,Yellow]
-sampleColumn7 = []
 
 -- Board will have 7 columns at max and each can be accessed with the respective number 0-6
 type Board = [Column]
@@ -62,7 +55,7 @@ startGame = (emptyboard, Red)
 
 
 
-board2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
+--board2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
 otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[]],Red)
 
 
