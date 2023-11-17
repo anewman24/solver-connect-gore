@@ -33,6 +33,13 @@ sampleboard = [sampleColumn1, sampleColumn2, sampleColumn3, sampleColumn4, sampl
 
 
 --type Move = Int
+move1 = 0
+move2 = 1
+move3 = 2
+move4 = 3
+move5 = 4
+move6 = 5
+move7 = 6
 
 
 -- Idea is to have board and which player's turn it is (maybe include number of moves?)
