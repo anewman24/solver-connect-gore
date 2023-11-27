@@ -1,47 +1,51 @@
 module Main where
-import Solver
+import GameMechanics
 import TestCases
 
 import System.Environment
 import System.IO
 import GHC.Base (undefined)
+import System.Console.Terminfo (columnAddress)
 
 main :: IO ()
 main =
     do args <- getArgs
+       putStr "Empty string"
 
 
 --Computes the best move and prints it to standard output, also should return result of said game
 putBestMove :: Game -> IO ()
+putBestMove (board,color) = undefined
 
 --Writes a game state to a file
 writeGame :: Game -> FilePath -> IO ()
+writeGame (board,color) = undefined
 
 --Loads a file and reads a game state from it
 loadGame :: FilePath -> IO Game
-loadGame path = 
-    do contents <- (readFile path) -- gives whole file as a string
-       let (g:gs) = lines contents -- creates a list where each newline is a string
+loadGame path = undefined
+    --do contents <- (readFile path) -- gives whole file as a string
+       --let (g:gs) = lines contents -- creates a list where each newline is a string
 
 --Takes a string in a text format and return the corresponding game
 readGame :: String -> Game
-readGame str = undefined
+readGame str = 
+    case lines str of
+        (cp:columns) ->
+            (convertToBoard columns, stringtoColor (stringToChar cp))
+        
+
+        
+
 
 -- 
 showGame :: Game -> String
-showGame game = 
-    let (board, color) = game
-        colorString = colorToString color
-        lstColumns = unlines (convertBoard board)
-    in colorString: "\n" ++ lstColumns
+showGame (board, cp) = unlines $ (colorToString cp) : (convertBoard board)
 
 -- Converts a board to a list of Strings, with each color as it's string representation
 -- Board = [[String]]
 convertBoard :: Board -> [String]
-convertBoard board = 
-    let strBoard = [if null column then column else map (colorToString) column | column <- Board ]
-        lstLines = [ (replicate (7- length col) "0") ++ col | col <- strBoard ]
-    in [unwords line | line <- lstLines]
+convertBoard board = [if null col then "\n" else unlines (map (colorToString) col) | col <- board]
 
 
 -- Converts a color to it's string representation
@@ -51,11 +55,21 @@ colorToString color =
         Yellow -> "1"
         Red -> "2"
 
---Converts the string to a color
-stringtoColor :: String -> Color
-stringtoColor string = 
-    case string of
-        "1" -> Yellow
-        "2" -> Red
+--String to char
+stringToChar :: String -> Char
+stringToChar str = 
+    case str of
+        "1" -> '1'
+        "2" -> '2'
 
+--Converts the char to a color
+stringtoColor :: Char -> Color
+stringtoColor char = 
+    case char of
+        '1' -> Yellow
+        '2' -> Red
+
+--Converts a list of String to a board where each string represent a color or empty
 convertToBoard :: [String] -> Board 
+convertToBoard lstString = [if column == "" then [] else  map stringtoColor column | column <- lstString]
+ 

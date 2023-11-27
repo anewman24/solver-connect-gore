@@ -1,5 +1,5 @@
 module TestCases where 
-  import Solver
+import GameMechanics
 
 {- 
 data Color = Empty | Yellow | Red deriving (Show, Eq)
@@ -13,6 +13,7 @@ column2 = [Yellow, Yellow, Red, Red, Yellow, Yellow]
 badcolumn = [Yellow, Red, Red, Yellow, Yellow, Red, Red]
 almostcolumn = [Red, Yellow, Red, Red, Empty, Empty]
 -} 
+
 sampleColumn1 = [Red, Yellow]
 sampleColumn2 = [Red,Red,Red,Red,Red]
 sampleColumn3 = []
@@ -42,7 +43,7 @@ games = (board1, Yellow)
 sampleGame = (sampleboard, Yellow)
 -}
 sampleGame = (sampleboard, Red)
-
+startGame = (emptyBoard, Red)
 -- Functions
 
 
@@ -79,12 +80,12 @@ allowedMoves sampleGame
 
 --Converts a Color type into its String representation
 --showCell :: Color -> String
-showCell Yellow
-showCell Red
+showCell Yellow = undefined
+showCell Red  = undefined
 
 --showBoard :: Game -> String
-showBoard gametime
-showBoard games
+showBoard gametime = undefined
+
 
 --padColumns :: Int -> Board -> Board
 
