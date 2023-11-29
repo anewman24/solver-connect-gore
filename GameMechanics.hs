@@ -54,10 +54,7 @@ winAcross col (w:x:y:z:as) =
           
 winAcross color columns = False
 
-opposite :: Color -> Color
-opposite Red = Yellow
-opposite Yellow =  Red
-
+-- When given a game, will find a winner or tie if there is one, or will return Nothing if not
 findWinner :: Game -> Maybe Winner
 findWinner (board, currentPlayer) 
        | anyWin Red board = Just $ Win Red 
