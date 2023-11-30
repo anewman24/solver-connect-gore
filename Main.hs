@@ -26,25 +26,21 @@ loadGame path = undefined
     --do contents <- (readFile path) -- gives whole file as a string
        --let (g:gs) = lines contents -- creates a list where each newline is a string
 
---Takes a string in a text format and return the corresponding game
+--Takes a string in a text format and returns the corresponding game
 readGame :: String -> Game
 readGame str = 
-    case words str of
+    case lines str of
         (cp:columns) ->
-            (convertToBoard columns, stringtoColor (stringToChar cp))
-        
-
-        
+            (convertToBoard columns, stringToColor cp) 
 
 
--- 
+-- Takes a game and converts it to the corresponding string in text format
 showGame :: Game -> String
 showGame (board, cp) = unlines $ (colorToString cp) : (convertBoard board)
 
--- Converts a board to a list of Strings, with each color as it's string representation
--- Board = [[String]]
+-- Converts a board to a list of strings, with each color as it's string representation
 convertBoard :: Board -> [String]
-convertBoard board = [if null col then "\n" else unwords (map (colorToString) col) | col <- board]
+convertBoard board = [unwords (map (colorToString) col) | col <- board]
 
 
 -- Converts a color to it's string representation
@@ -54,21 +50,15 @@ colorToString color =
         Yellow -> "1"
         Red -> "2"
 
---String to char
-stringToChar :: String -> Char
-stringToChar str = 
+--Converts a string to it's corresponding color
+stringToColor :: String -> Color
+stringToColor str = 
     case str of
-        "1" -> '1'
-        "2" -> '2'
+        "1" -> Yellow
+        "2" -> Red
 
---Converts the char to a color
-stringtoColor :: Char -> Color
-stringtoColor char = 
-    case char of
-        '1' -> Yellow
-        '2' -> Red
-
---Converts a list of String to a board where each string represent a color or empty
+--Converts a list of String to a board where each string represent a color or empty column
 convertToBoard :: [String] -> Board 
-convertToBoard lstString = [if column == "" then [] else  map stringtoColor column | column <- lstString]
+convertToBoard lstString = 
+    [map stringToColor (words column) | column <- lstString]
  
