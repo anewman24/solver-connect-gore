@@ -5,7 +5,6 @@ import TestCases
 import System.Environment
 import System.IO
 import GHC.Base (undefined)
-import System.Console.Terminfo (columnAddress)
 
 main :: IO ()
 main =
@@ -45,7 +44,7 @@ showGame (board, cp) = unlines $ (colorToString cp) : (convertBoard board)
 -- Converts a board to a list of Strings, with each color as it's string representation
 -- Board = [[String]]
 convertBoard :: Board -> [String]
-convertBoard board = [if null col then "\n" else unlines (map (colorToString) col) | col <- board]
+convertBoard board = [if null col then "\n" else unwords (map (colorToString) col) | col <- board]
 
 
 -- Converts a color to it's string representation
