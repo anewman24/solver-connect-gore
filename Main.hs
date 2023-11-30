@@ -1,30 +1,36 @@
 module Main where
+import Solver
 import GameMechanics
-import TestCases
-
+--import TestCases
 import System.Environment
 import System.IO
 import GHC.Base (undefined)
 
+-- reads a file name from standard input or the arguments, loads the game, and prints the best move
+-- have -v flag print result of such a move
 main :: IO ()
-main =
+main = 
     do args <- getArgs
-       putStr "Empty string"
+       let fname = head args
+       game <- loadGame fname
+       putBestMove game
 
 
 --Computes the best move and prints it to standard output, also should return result of said game
 putBestMove :: Game -> IO ()
-putBestMove (board,color) = undefined
+putBestMove game = putStr $ bestMove game
 
 --Writes a game state to a file
 writeGame :: Game -> FilePath -> IO ()
-writeGame (board,color) = undefined
-
+writeGame game path = writeFile path (showGame game)
+       
 --Loads a file and reads a game state from it
 loadGame :: FilePath -> IO Game
 loadGame path = undefined
-    --do contents <- (readFile path) -- gives whole file as a string
-       --let (g:gs) = lines contents -- creates a list where each newline is a string
+    do contents <- (readFile path) -- gives whole file as a string
+       let results = readGame contents
+       return results
+
 
 --Takes a string in a text format and returns the corresponding game
 readGame :: String -> Game
