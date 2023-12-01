@@ -159,5 +159,3 @@ padColumns n board = map (padTo n) board
 
 padTo :: Int -> [Color] -> [Maybe Color]
 padTo n xs = take n (map Just xs ++ repeat Nothing)
-
-

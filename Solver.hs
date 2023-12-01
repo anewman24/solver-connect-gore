@@ -26,4 +26,3 @@ possibleBoards :: Game -> [Maybe Game] -- takes a game creates a list of maybe g
 possibleBoards game = 
   [updateBoard game moves | moves <- validmoves]
       where validmoves = allowedMoves game
-
