@@ -53,12 +53,7 @@ type Game = (Board, Color)
 
 
 
-<<<<<<< HEAD
-board11 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
-=======
 sampleboard2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
->>>>>>> 63a5312e682cc50f262b7909c5adf5cf62937693
-otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[]],Red)
 
 
 
@@ -159,3 +154,5 @@ padColumns n board = map (padTo n) board
 
 padTo :: Int -> [Color] -> [Maybe Color]
 padTo n xs = take n (map Just xs ++ repeat Nothing)
+
+
