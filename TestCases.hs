@@ -1,5 +1,5 @@
 module TestCases where 
-  import GameMechanics
+import GameMechanics
 
 {- 
 data Color =  Yellow | Red deriving (Show, Eq)
@@ -7,9 +7,21 @@ data Winner = Tie | Win Color deriving (Show, Eq)
 -}
 
 --type Column = [Color] 6 colors in a column (0-5)
-emptyColumn = []
 
+{-emptyColumn = []
+column1 = [Red, Yellow, Yellow, Red, Red, Red]
+column2 = [Yellow, Yellow, Red, Red, Yellow, Yellow]
+badcolumn = [Yellow, Red, Red, Yellow, Yellow, Red, Red]
+almostcolumn = [Red, Yellow, Red, Red, Empty, Empty]
+-} 
 
+sampleColumn1 = [Red, Yellow]
+sampleColumn2 = [Red,Red,Red,Red,Red]
+sampleColumn3 = []
+sampleColumn4 = [Yellow,Yellow, Yellow,Yellow,Yellow,Yellow]
+sampleColumn5 = [Red,Red,Red]
+sampleColumn6 = [Yellow, Red, Red,Yellow]
+sampleColumn7 = []
 
 
 
@@ -25,8 +37,14 @@ badBoard = [[Yellow, Yellow, Red, Red,Yellow, Red, Red],[Red, Yellow, Red], [Red
 
 -- Idea is to have board and which player's turn it is (maybe include number of moves?)
 --type Game = (Board, Color)
-sampleGame = (sampleBoard, Red)
-newGame = (emptyBoard, Yellow)
+
+{-gametime = (emptyBoard, Red)
+games = (board1, Yellow)
+sampleGame = (sampleboard, Yellow)
+-}
+sampleGame = (sampleboard, Red)
+startGame = (emptyBoard, Red)
+
 -- Functions
 
 
@@ -63,12 +81,12 @@ allowedMoves sampleGame
 
 --Converts a Color type into its String representation
 --showCell :: Color -> String
-showCell Yellow
-showCell Red
+showCell Yellow = undefined
+showCell Red  = undefined
 
 --showBoard :: Game -> String
-showBoard gametime
-showBoard games
+showBoard gametime = undefined
+
 
 --padColumns :: Int -> Board -> Board
 
