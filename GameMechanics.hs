@@ -16,11 +16,10 @@ data Winner = Tie | Win Color deriving (Show, Eq)
 -- Column will have 6 colors at max and represents an individual column in the game
 type Column = [Color]
 
+
 -- Board will have 7 columns at max and each can be accessed with the respective number 0-6
 type Board = [Column]
 
-sampleboard = [sampleColumn1, sampleColumn2, sampleColumn3, sampleColumn4, sampleColumn5, sampleColumn6, sampleColumn7]
-emptyboard = [[]]
 board1 = [[],[Red],[Yellow,Red,Yellow,Red],[Red,Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
 --Vertical win for yellow on board 1
 board2 = [[],[Yellow],[Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow],[]]
@@ -48,14 +47,17 @@ type Move = Int
 
 -- Idea is to have board and which player's turn it is (maybe include number of moves?)
 type Game = (Board, Color)
-sampleGame = (sampleboard, Red)
-startGame = (emptyboard, Red)
+
 
 --otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 
 
 
---board2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
+<<<<<<< HEAD
+board11 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
+=======
+sampleboard2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
+>>>>>>> 63a5312e682cc50f262b7909c5adf5cf62937693
 otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[]],Red)
 
 
@@ -157,5 +159,3 @@ padColumns n board = map (padTo n) board
 
 padTo :: Int -> [Color] -> [Maybe Color]
 padTo n xs = take n (map Just xs ++ repeat Nothing)
-
-
