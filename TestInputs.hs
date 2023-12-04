@@ -41,3 +41,10 @@ diagWinYellowBoard = [[Yellow,Red,Red,Red],[Yellow,Red,Yellow,Red],[Yellow,Yello
 
 --use to test verticalWinBoard, Yellow should win
 tallWinYellowBoard = [[Red,Red,Red],[Yellow,Red],[Red,Red],[Red,Yellow],[Yellow,Red,Yellow],[Yellow,Yellow,Yellow,Yellow,Red],[Red,Yellow,Yellow,Yellow]]
+
+
+--if run findWinner, should return Tie (or Nothing?)
+tieGameNothing = ([[Yellow,Red,Red,Red],[Yellow,Red,Yellow,Red],[Yellow,Red,Red,Red,Yellow,Red],[Yellow,Red,Yellow,Yellow,Yellow],[Red,Yellow,Red,Yellow],[Yellow,Red,Yellow,Red],[Yellow]], Red)
+
+tieGame = ([[Yellow,Red,Yellow,Red,Red,Red],[Red,Yellow,Yellow,Red,Yellow,Red],[Yellow,Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow,Yellow],[Red,Red,Red,Yellow,Red,Yellow],[Yellow,Red,Yellow,Red,Yellow,Red],[Yellow,Red,Red,Yellow,Yellow,Yellow]], Red)
+
