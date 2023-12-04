@@ -74,7 +74,7 @@ swapColor :: Color -> Color
 swapColor Red = Yellow
 swapColor Yellow = Red
 
--- Takes a board, a move, and a color and returns a updates board
+-- Takes a board, a move, and a color and returns an updated board
 makeNewBoard :: Board -> Move -> Color -> Board
 makeNewBoard board move color = 
     let (left, (b:bs)) = splitAt move board

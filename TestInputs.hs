@@ -6,7 +6,7 @@ tooBigCol = [Red,Yellow,Red,Red,Yellow,Red,Yellow]
 emptyBoard = [[]]
 
 --generic sample board
-sampleBoard = [[Red, Yellow], [Red,Red,Yellow,Yellow,Red], [], [Red,Red,Red,Yellow,Yellow,Yellow], [Red,Red,Red], [Yellow, Red, Red,Yellow], []]
+sampleBoard = [[Yellow,Red,Yellow], [Yellow,Red,Red,Yellow,Yellow,Red], [], [Red,Red,Red,Yellow,Yellow,Yellow], [Red,Red,Red], [Yellow, Red, Red,Yellow], [Yellow,Yellow]]
 
 
 
@@ -35,6 +35,7 @@ invalidGame2 = ([[Red],[Yellow],[Yellow,Red],[Red],[],[],[],[Red]], Red)
 bmBoard = [[Yellow,Yellow,Red,Yellow,Yellow],[Red,Red,Yellow,Red,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Red],[Red,Red,Red,Yellow,Red,Yellow],[Yellow,Red,Yellow,Yellow,Red],[Yellow,Yellow,Red,Red,Red],[Yellow,Red,Yellow,Yellow,Yellow]]
 
 
+
 --use to test winAcross, Yellow should win
 diagWinYellowBoard = [[Yellow,Red,Red,Red],[Yellow,Red,Yellow,Red],[Yellow,Yellow,Red],[Red,Yellow,Yellow],[Yellow,Red,Yellow],[Yellow,Red],[Red,Yellow]]
 
@@ -43,8 +44,23 @@ diagWinYellowBoard = [[Yellow,Red,Red,Red],[Yellow,Red,Yellow,Red],[Yellow,Yello
 tallWinYellowBoard = [[Red,Red,Red],[Yellow,Red],[Red,Red],[Red,Yellow],[Yellow,Red,Yellow],[Yellow,Yellow,Yellow,Yellow,Red],[Red,Yellow,Yellow,Yellow]]
 
 
---if run findWinner, should return Tie (or Nothing?)
+
+--if run findWinner, return Nothing
 tieGameNothing = ([[Yellow,Red,Red,Red],[Yellow,Red,Yellow,Red],[Yellow,Red,Red,Red,Yellow,Red],[Yellow,Red,Yellow,Yellow,Yellow],[Red,Yellow,Red,Yellow],[Yellow,Red,Yellow,Red],[Yellow]], Red)
 
+nothingBoard = [[Yellow,Red,Red,Red],[Yellow,Red,Yellow,Red],[Yellow,Red,Red,Red,Yellow,Red],[Yellow,Red,Yellow,Yellow,Yellow],[Red,Yellow,Red,Yellow],[Yellow,Red,Yellow,Red],[Yellow]]
+
+
+--if run findWinner, return Tie
 tieGame = ([[Yellow,Red,Yellow,Red,Red,Red],[Red,Yellow,Yellow,Red,Yellow,Red],[Yellow,Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow,Yellow],[Red,Red,Red,Yellow,Red,Yellow],[Yellow,Red,Yellow,Red,Yellow,Red],[Yellow,Red,Red,Yellow,Yellow,Yellow]], Red)
 
+-- THERE IS A PROBLEM HERE WITH makeNewBoard 
+--SHOULD NOT BE ABLE TO MAKE NEW BOARD BECAUSE THE BOARD IS FULL
+tieBoard = [[Yellow,Red,Yellow,Red,Red,Red],[Red,Yellow,Yellow,Red,Yellow,Red],[Yellow,Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow,Yellow],[Red,Red,Red,Yellow,Red,Yellow],[Yellow,Red,Yellow,Red,Yellow,Red],[Yellow,Red,Red,Yellow,Yellow,Yellow]]
+
+
+--if run allowedMves, returns [0,2,4,5,6]
+amSample = (sampleBoard, Red)
+
+--test run makeNewBoard
+--sampleBoard 0 Red
