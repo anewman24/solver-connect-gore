@@ -20,27 +20,6 @@ type Column = [Color]
 -- Board will have 7 columns at max and each can be accessed with the respective number 0-6
 type Board = [Column]
 
-board1 = [[],[Red],[Yellow,Red,Yellow,Red],[Red,Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
---Vertical win for yellow on board 1
-board2 = [[],[Yellow],[Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow],[]]
---Vertical win for Red on board 2 
-board3 = [[],[Red],[Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[Red,Yellow]]
--- horizontal win for red on board 3
-board4 =[[],[Yellow],[Red,Yellow,Red,Yellow],[Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow],[Yellow,Red]]
--- horizontal win for yellow on board 4
-board5 = [[],[Red],[Red,Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Red,Yellow],[Yellow,Red,Yellow,Red,Red],[]]
---diagonalWin for Yellow on board 5 (right diagonal)
-board6 = [[],[Yellow],[Yellow,Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Yellow,Red],[Red,Yellow,Red,Yellow,Yellow],[]]
---diagonalWin for Red on board 6 (right diagonal)
-board7 = reverse board5
---diagonalWin for Yellow on board 7 (left diagonal)
-board8 = reverse board6
---diagonalWin for Red on board 8 (left diagonal)
-board9 = [[],[Yellow,Red],[Yellow,Red,Yellow,Red,Yellow,Red],[Red,Yellow,Yellow,Yellow,Red,Red],[Red,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
--- Tie test
-board10 =[[],[Red],[Red,Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Red,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
---Nothing Test
-
 
 -- Move represents the index of the column to be accessed, will be between 0 and 6 
 type Move = Int
@@ -48,17 +27,6 @@ type Move = Int
 -- Idea is to have board and which player's turn it is (maybe include number of moves?)
 type Game = (Board, Color)
 
-
---otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
-
-
-
-<<<<<<< HEAD
-board11 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
-=======
-sampleboard2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
->>>>>>> 63a5312e682cc50f262b7909c5adf5cf62937693
-otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[]],Red)
 
 
 
