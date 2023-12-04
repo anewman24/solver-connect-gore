@@ -24,6 +24,7 @@ possibleBoards game =
   [updateBoard game moves | moves <- validmoves]
       where validmoves = allowedMoves game
 
+
 -- best move is supposed to force a win for the player or force a tie 
 
 
@@ -45,6 +46,3 @@ bestMove game@(board,turn) =
                   case lookup Tie possibleResults of 
                     Just move -> Just move
                     Nothing -> Just (snd(head possibleResults))
-
-
-
