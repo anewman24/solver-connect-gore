@@ -29,7 +29,7 @@ loadGame path = undefined
 --Takes a string in a text format and return the corresponding game
 readGame :: String -> Game
 readGame str = 
-    case words str of
+    case lines str of
         (cp:columns) ->
             (convertToBoard columns, stringtoColor (stringToChar cp))
         
