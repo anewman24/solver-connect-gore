@@ -29,7 +29,7 @@ main =
        then putStrLn $ usageInfo "Main [options] [filename] \nInteractive implementation of connect four. " options
        else 
            do 
-            let fname = if null inputs then "sampleGame.txt" else head inputs
+            let fname = if null inputs then "newGame.txt" else head inputs
             game <- loadGame fname
             dispatch flags game
 
@@ -39,7 +39,7 @@ main =
 dispatch :: [Flag] -> Game -> IO()
 dispatch flags game 
     | WinnerFlag `elem` flags   = putBestMove game
-    | Interactive `elem` flags  = interactivePlay --need to finish 
+    | Interactive `elem` flags  = undefined --interactivePlay 
     | (getMove flags) /= 0      = putMove game flags
     | otherwise                 = putGoodMove game flags
 
@@ -52,7 +52,7 @@ checkVerbose (f:flags) = checkVerbose flags
 
 
 -- Checks if a move is present and if it is returns that move, else return Nothing 
-getMove :: [Flag] -> Int
+getMove :: [Flag] -> Int --should I return this to a maybe?
 getMove [] = 0
 getMove (MoveFlag x:flags) = (read x) - 1
 getMove (f:flags) = getMove flags
@@ -66,7 +66,12 @@ getDepth (f:flags) = getDepth flags
 
 -- Will create a new game to play against the computer --> start w/ player's move, update board
 -- call whoMightWin --> update board w/ that move ask player for move 
-interactivePlay = undefined
+--interactivePlay = undefined
+
+
+--computerPlay :: Game -> [Flags] -> Game
+--computerPlay game flags = 
+    
 
 --When given a move will make that move and print resulting board 
 putMove :: Game -> [Flag] -> IO() 
