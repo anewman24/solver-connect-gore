@@ -28,9 +28,10 @@ main =
        if Help `elem` flags || not (null errors)
        then putStrLn $ usageInfo "Main [options] [filename] \nInteractive implementation of connect four. " options
        else 
-           do let fname = if null inputs then "sampleGame.txt" else head inputs
-              game <- loadGame fname
-              dispatch flags game
+           do 
+            let fname = if null inputs then "sampleGame.txt" else head inputs
+            game <- loadGame fname
+            dispatch flags game
 
 
 
@@ -38,15 +39,22 @@ main =
 dispatch :: [Flag] -> Game -> IO()
 dispatch flags game 
     | WinnerFlag `elem` flags   = putBestMove game
-    | Interactive `elem` flags  = undefined
-    | Verbose `elem` flags      = undefined
-    | otherwise                 = putStrLn $ whoMightWin game (getDepth flags)
+    | Interactive `elem` flags  = interactivePlay --need to finish 
+    | (getMove flags) /= 0      = putMove game flags
+    | otherwise                 = putGoodMove game flags
+
+
+
+checkVerbose :: [Flag] -> Bool
+checkVerbose [] = False
+checkVerbose (Verbose:flags) = True
+checkVerbose (f:flags) = checkVerbose flags
 
 
 -- Checks if a move is present and if it is returns that move, else return Nothing 
-getMove :: [Flag] -> Maybe Move
-getMove [] = Nothing
-getMove (MoveFlag x:flags) = Just $ read x
+getMove :: [Flag] -> Int
+getMove [] = 0
+getMove (MoveFlag x:flags) = (read x) - 1
 getMove (f:flags) = getMove flags
 
 
@@ -56,11 +64,39 @@ getDepth [] = 5
 getDepth (Depth x:flags) = read x
 getDepth (f:flags) = getDepth flags
 
+-- Will create a new game to play against the computer --> start w/ player's move, update board
+-- call whoMightWin --> update board w/ that move ask player for move 
+interactivePlay = undefined
+
+--When given a move will make that move and print resulting board 
+putMove :: Game -> [Flag] -> IO() 
+putMove game flags = 
+    if checkVerbose flags
+    then case updateGame game (getMove flags) of
+            Nothing -> putStrLn "Move given is invalid or no more moves can be made"
+            Just game -> putStrLn $ showGame game
+    else case updateGame game (getMove flags) of
+            Nothing -> putStrLn "Move given is invalid or no more moves can be made"
+            Just game -> putStrLn $ showBoard game
 
 --Computes the best move and prints it to standard output, also should return result of said game
 putBestMove :: Game -> IO ()
-putBestMove game = putStrLn $ bestMove game
+putBestMove game = 
+    case bestMove game of 
+        Nothing -> putStrLn "Cannot find a best move for a game that has already been won."
+        Just move -> putStrLn move
 
+-- for normal running of program will print out a good move for the game, if verbose tag is present
+-- will print result of that move
+putGoodMove :: Game -> [Flag] -> IO()
+putGoodMove game flags = 
+    let (rating,move) = whoMightWin game (getDepth flags)
+    in if checkVerbose flags
+       then let resp = updateGame game move
+            in case resp of
+                Just game -> putStrLn $ move ++ showGame game
+                Nothing -> putStrLn "An error has occurred, the move is not valid"
+       else putStrLn move
 
 --Writes a game state to a file
 writeGame :: Game -> FilePath -> IO ()

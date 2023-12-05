@@ -89,8 +89,8 @@ makeNewBoard board move color =
     in left ++ edited ++ bs
 
 -- Given a Game and a Move, creates a new Game with the result of the given Move. Will return a new Game or if the Move is not valid; will return Nothing.
-updateBoard :: Game -> Move -> Maybe Game
-updateBoard game move =
+updateGame :: Game -> Move -> Maybe Game
+updateGame game move =
     if move `elem` (allowedMoves game)
     then let (board, color) = game
              newBoard = makeNewBoard board move color
@@ -115,12 +115,12 @@ showCell (Just Yellow) = "[y]"
 showCell (Just Red) = "[r]"
 showCell Nothing = "[ ]"
 
---showBoard :: Game -> String
---showBoard (board, currentPlayer) = unlines (header : rowStrings)
-  --where
-    --header = "  1  2  3  4  5  6  7"
-    --paddedBoard = padColumns 7 board
-    --rowStrings = map (intercalate "|" . map (showCell)) (transpose paddedBoard)
+showBoard :: Game -> String
+showBoard (board, currentPlayer) = unlines (header : rowStrings)
+  where
+    header = "  1  2  3  4  5  6  7"
+    paddedBoard = padColumns 7 board
+    rowStrings = map (intercalate "|" . map (showCell)) (transpose paddedBoard)
 
 padColumns :: Int -> Board ->  [[Maybe Color]]
 padColumns n board = map (padTo n) board
