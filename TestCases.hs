@@ -42,7 +42,7 @@ badBoard = [[Yellow, Yellow, Red, Red,Yellow, Red, Red],[Red, Yellow, Red], [Red
 games = (board1, Yellow)
 sampleGame = (sampleboard, Yellow)
 -}
-sampleGame = (sampleboard, Red)
+sampleGame = (sampleBoard, Red)
 startGame = (emptyBoard, Red)
 
 -- Functions

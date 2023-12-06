@@ -5,6 +5,7 @@ import GameMechanics
 import System.Console.GetOpt
 import System.Environment
 import System.IO
+import GHC.Base (undefined)
 
 data Flag = Help | Victor | Verbose | Interactive | Moves String | Depth String deriving (Show, Eq) 
 
@@ -27,15 +28,20 @@ main =
        let (flags, inputs, errors) = getOpt Permute options args
        if Help `elem` flags || not (null errors)
        then putStrLn $ usageInfo "Main [options] [filename] \nInteractive implementation of connect four. " options
-       else 
-           do let fname = if null inputs then "sampleGame.txt" else head inputs
-           game <- loadGame fname
-           putBestMove game
+       else
+        do 
+            let fname = if null inputs then "sampleGame.txt" else head inputs
+            game <- loadGame fname
+            putBestMove game
 
 
 --Computes the best move and prints it to standard output, also should return result of said game
 putBestMove :: Game -> IO ()
-putBestMove game = putStr $ bestMove game
+putBestMove game = 
+    case bestMove game of
+        Nothing -> undefined
+        Just mv -> undefined
+
 
 
 --Writes a game state to a file
