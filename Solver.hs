@@ -21,7 +21,7 @@ whoWillWin game@(board, turn) =
 
 possibleBoards :: Game -> [Maybe Game] -- takes a game creates a list of maybe games with all possible moves in the original game state
 possibleBoards game = 
-  [updateBoard game moves | moves <- validmoves]
+  [updateGame game moves | moves <- validmoves]
       where validmoves = allowedMoves game
 
 
