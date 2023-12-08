@@ -48,7 +48,7 @@ type Move = Int
 -- Idea is to have board and which player's turn it is (maybe include number of moves?)
 type Game = (Board, Color)
 
-
+type Rating = Int -- used for rateGame, can be positive or negative
 --otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
 
 

@@ -46,3 +46,32 @@ bestMove game@(board,turn) =
                   case lookup Tie possibleResults of 
                     Just move -> Just move
                     Nothing -> Just (snd(head possibleResults))
+
+-- whoMightWin is supposed to be another version of whoWillWin/bestMove that takes an int as a cut off parameter/ depth to recurse over the possible boards
+-- a tmp rateGame was used to test whoMightWin
+{-rateGame :: Game -> Int
+rateGame game = 
+    case findWinner game of
+        Just (Win Red) -> 1000000
+        Just (Win Yellow) -> -100000
+        Just (Tie) -> 0
+        Nothing -> 0
+        -}
+
+
+whoMightWin :: Game -> Int -> (Rating, Move)
+whoMightWin game@(board,turn) 0 = (rateGame game, -1)
+whoMightWin game@(board,turn) int = 
+          let boardMoves = catMaybes [liftMaybe (updateBoard game move, move) | move <- allowedMoves game]
+              possibleResults :: [(Rating, Move)]
+              possibleResults =  [ (fst (whoMightWin resGame (int - 1)), m) |  (resGame,m) <- boardMoves] -- a list of positive and negative values with their move (rating,move)
+              -- calling maximum/minimum on a list of tuples return the tuples with the maximum/minimum fst
+              goodMove = 
+                  if turn == Red
+                    then maximum possibleResults
+                    else minimum possibleResults
+          in goodMove
+          
+
+    
+
