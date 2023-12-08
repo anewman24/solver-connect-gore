@@ -20,27 +20,6 @@ type Column = [Color]
 -- Board will have 7 columns at max and each can be accessed with the respective number 0-6
 type Board = [Column]
 
-board1 = [[],[Red],[Yellow,Red,Yellow,Red],[Red,Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
---Vertical win for yellow on board 1
-board2 = [[],[Yellow],[Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow],[]]
---Vertical win for Red on board 2 
-board3 = [[],[Red],[Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[Red,Yellow]]
--- horizontal win for red on board 3
-board4 =[[],[Yellow],[Red,Yellow,Red,Yellow],[Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Yellow,Red],[Yellow,Yellow,Red,Yellow,Yellow],[Yellow,Red]]
--- horizontal win for yellow on board 4
-board5 = [[],[Red],[Red,Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Yellow,Yellow,Yellow,Red,Yellow],[Yellow,Red,Yellow,Red,Red],[]]
---diagonalWin for Yellow on board 5 (right diagonal)
-board6 = [[],[Yellow],[Yellow,Red,Yellow,Red,Yellow],[Yellow,Red,Red,Red,Yellow,Yellow],[Red,Red,Red,Yellow,Red],[Red,Yellow,Red,Yellow,Yellow],[]]
---diagonalWin for Red on board 6 (right diagonal)
-board7 = reverse board5
---diagonalWin for Yellow on board 7 (left diagonal)
-board8 = reverse board6
---diagonalWin for Red on board 8 (left diagonal)
-board9 = [[],[Yellow,Red],[Yellow,Red,Yellow,Red,Yellow,Red],[Red,Yellow,Yellow,Yellow,Red,Red],[Red,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
--- Tie test
-board10 =[[],[Red],[Red,Yellow,Red,Yellow,Red],[Yellow,Yellow,Yellow,Red,Red],[Red,Yellow,Yellow,Red,Yellow],[Red,Red,Yellow,Red,Red],[]]
---Nothing Test
-
 
 -- Move represents the index of the column to be accessed, will be between 0 and 6 
 type Move = Int
@@ -49,12 +28,8 @@ type Move = Int
 type Game = (Board, Color)
 
 
---otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[Empty],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[Empty]],Red)
+type Rating = Int -- used for rateGame, can be positive or negative
 
-
-
-sampleboard2 = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
-otherboard = ([[Red,Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow,Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow,Red,Red,Yellow],[]],Red)
 
 
 
@@ -117,8 +92,8 @@ makeNewBoard board move color =
     in left ++ edited ++ bs
 
 -- Given a Game and a Move, creates a new Game with the result of the given Move. Will return a new Game or if the Move is not valid; will return Nothing.
-updateBoard :: Game -> Move -> Maybe Game
-updateBoard game move =
+updateGame :: Game -> Move -> Maybe Game
+updateGame game move =
     if move `elem` (allowedMoves game)
     then let (board, color) = game
              newBoard = makeNewBoard board move color
@@ -143,12 +118,12 @@ showCell (Just Yellow) = "[y]"
 showCell (Just Red) = "[r]"
 showCell Nothing = "[ ]"
 
---showBoard :: Game -> String
---showBoard (board, currentPlayer) = unlines (header : rowStrings)
-  --where
-    --header = "  1  2  3  4  5  6  7"
-    --paddedBoard = padColumns 7 board
-    --rowStrings = map (intercalate "|" . map (showCell)) (transpose paddedBoard)
+showBoard :: Game -> String
+showBoard (board, currentPlayer) = unlines (header : rowStrings)
+  where
+    header = "  1  2  3  4  5  6  7"
+    paddedBoard = padColumns 7 board
+    rowStrings = map (intercalate "|" . map (showCell)) (transpose paddedBoard)
 
 padColumns :: Int -> Board ->  [[Maybe Color]]
 padColumns n board = map (padTo n) board
