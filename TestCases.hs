@@ -2,11 +2,12 @@ module TestCases where
 import GameMechanics
 
 {- 
-data Color = Empty | Yellow | Red deriving (Show, Eq)
+data Color =  Yellow | Red deriving (Show, Eq)
 data Winner = Tie | Win Color deriving (Show, Eq)
 -}
 
 --type Column = [Color] 6 colors in a column (0-5)
+
 {-emptyColumn = []
 column1 = [Red, Yellow, Yellow, Red, Red, Red]
 column2 = [Yellow, Yellow, Red, Red, Yellow, Yellow]
@@ -23,34 +24,27 @@ sampleColumn6 = [Yellow, Red, Red,Yellow]
 sampleColumn7 = []
 
 
+
 --type Board = [Column] 7 columns in a board
-emptyBoard = [[]]
---or emptyBoard = []
-{-board1 = [column1, column2, column2, column1 almostcolumn,column1, column2]
-badBoard = [column1, column2, badcolumn, column1, almostcolumn, column2 badcolumn]
-sampleboard = ([[Red, Yellow],[Red,Red,Red,Red,Red],[],[Yellow,Yellow, Yellow,Yellow,Yellow,Yellow],[Red,Red,Red],[Yellow, Red, Red,Yellow],[]],Red)
--}
-sampleboard = [sampleColumn1, sampleColumn2, sampleColumn3, sampleColumn4, sampleColumn5, sampleColumn6, sampleColumn7]
+emptyBoard = []
+sampleBoard = [[Yellow, Red, Red], [Red, Yellow, Red], [Red, Red], [Yellow, Yellow], [Yellow, Red, Yellow], [Yellow, Red], [Yellow]]
+badBoard = [[Yellow, Yellow, Red, Red,Yellow, Red, Red],[Red, Yellow, Red], [Red, Red], [Yellow, Yellow], [Yellow, Red, Yellow], [Yellow, Red], [Yellow]] 
 
 
---type Move = Int
-move1 = 0
-move2 = 1
-move3 = 2
-move4 = 3
-move5 = 4
-move6 = 5
-move7 = 6
+--type Move = Int 
+--is actually the int of what column the move is going to go in 
 
 
 -- Idea is to have board and which player's turn it is (maybe include number of moves?)
 --type Game = (Board, Color)
+
 {-gametime = (emptyBoard, Red)
 games = (board1, Yellow)
 sampleGame = (sampleboard, Yellow)
 -}
 sampleGame = (sampleboard, Red)
 startGame = (emptyBoard, Red)
+
 -- Functions
 
 

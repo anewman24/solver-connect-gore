@@ -28,6 +28,9 @@ type Move = Int
 type Game = (Board, Color)
 
 
+type Rating = Int -- used for rateGame, can be positive or negative
+
+
 
 
 -- when printing (such as in ghci) use putStrLn (showBoard <board>)
