@@ -151,6 +151,3 @@ convertToBoard :: [String] -> Board
 convertToBoard lstString = 
     [map stringToColor (words column) | column <- lstString]
 
---Ignore this and delete once done:
-whoMightWin = undefined
-bestMove = undefined
