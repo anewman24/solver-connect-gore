@@ -89,7 +89,7 @@ putBestMove :: Game -> IO ()
 putBestMove game = 
     case bestMove game of 
         Nothing -> putStrLn "Cannot find a best move for a game that has already been won."
-        Just move -> putStrLn move
+        Just move -> putStrLn (show move)
 
 -- for normal running of program will print out a good move for the game, if verbose tag is present
 -- will print result of that move
@@ -99,9 +99,9 @@ putGoodMove game flags =
     in if checkVerbose flags
        then let resp = updateGame game move
             in case resp of
-                Just game -> putStrLn $ move ++ showGame game
+                Just game -> putStrLn $ (show move ++ "\n" ++ showGame game)
                 Nothing -> putStrLn "An error has occurred, the move is not valid"
-       else putStrLn move
+       else putStrLn $ show move
 
 --Writes a game state to a file
 writeGame :: Game -> FilePath -> IO ()
