@@ -16,7 +16,7 @@ whoWillWin game@(board, turn) =
               else 
                   if Tie `elem` possibleResults -- if not, then checks for a tie
                 then Tie
-                else Win (opposite turn) -- if not, then the other player is the infered winner 
+                else Win (swapColor turn) -- if not, then the other player is the infered winner 
                 
 
 possibleBoards :: Game -> [Maybe Game] -- takes a game creates a list of maybe games with all possible moves in the original game state
