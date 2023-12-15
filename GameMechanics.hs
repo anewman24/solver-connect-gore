@@ -16,14 +16,20 @@ data Winner = Tie | Win Color deriving (Show, Eq)
 -- Column will have 6 colors at max and represents an individual column in the game
 type Column = [Color]
 
+
 -- Board will have 7 columns at max and each can be accessed with the respective number 0-6
 type Board = [Column]
+
 
 -- Move represents the index of the column to be accessed, will be between 0 and 6 
 type Move = Int
 
 -- Idea is to have board and which player's turn it is (maybe include number of moves?)
 type Game = (Board, Color)
+
+type Rating = Int -- used for rateGame, can be positive or negative
+
+
 
 
 -- when printing (such as in ghci) use putStrLn (showBoard <board>)
@@ -82,8 +88,8 @@ makeNewBoard board move color =
     in left ++ edited ++ bs
 
 -- Given a Game and a Move, creates a new Game with the result of the given Move. Will return a new Game or if the Move is not valid; will return Nothing.
-updateBoard :: Game -> Move -> Maybe Game
-updateBoard game move =
+updateGame :: Game -> Move -> Maybe Game
+updateGame game move =
     if move `elem` (allowedMoves game)
     then let (board, color) = game
              newBoard = makeNewBoard board move color

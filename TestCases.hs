@@ -1,19 +1,40 @@
-module TestCases where
-  import TestInputs
+module TestCases where 
+import GameMechanics
 
 {- 
-data Color = Yellow | Red deriving (Show, Eq)
+data Color =  Yellow | Red deriving (Show, Eq)
 data Winner = Tie | Win Color deriving (Show, Eq)
 -}
 
---type Column = [Color] // 6 colors in a column (0-5)
+--type Column = [Color] 6 colors in a column (0-5)
+
+{-emptyColumn = []
+column1 = [Red, Yellow, Yellow, Red, Red, Red]
+column2 = [Yellow, Yellow, Red, Red, Yellow, Yellow]
+badcolumn = [Yellow, Red, Red, Yellow, Yellow, Red, Red]
+almostcolumn = [Red, Yellow, Red, Red, Empty, Empty]
+-} 
+
+sampleColumn1 = [Red, Yellow]
+sampleColumn2 = [Red,Red,Red,Red,Red]
+sampleColumn3 = []
+sampleColumn4 = [Yellow,Yellow, Yellow,Yellow,Yellow,Yellow]
+sampleColumn5 = [Red,Red,Red]
+sampleColumn6 = [Yellow, Red, Red,Yellow]
+sampleColumn7 = []
+
+
+
+--type Board = [Column] 7 columns in a board
+emptyBoard = []
+sampleBoard = [[Yellow, Red, Red], [Red, Yellow, Red], [Red, Red], [Yellow, Yellow], [Yellow, Red, Yellow], [Yellow, Red], [Yellow]]
+badBoard = [[Yellow, Yellow, Red, Red,Yellow, Red, Red],[Red, Yellow, Red], [Red, Red], [Yellow, Yellow], [Yellow, Red, Yellow], [Yellow, Red], [Yellow]] 
+
 
 --type Board = [Column] //  7 columns in a board
 
-
---type Move = Int // for each column
-
---type Game = (Board, Color)
+sampleGame = (sampleBoard, Red)
+startGame = (emptyBoard, Red)
 
 
 
@@ -46,10 +67,12 @@ data Winner = Tie | Win Color deriving (Show, Eq)
 
 --Converts a Color type into its String representation
 --showCell :: Color -> String
---showCell Yellow
---showCell Red
+
+showCell Yellow = undefined
+showCell Red  = undefined
 
 --showBoard :: Game -> String
+showBoard gametime = undefined
 
 
 --padColumns :: Int -> Board -> Board
