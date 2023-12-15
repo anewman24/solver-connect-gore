@@ -4,6 +4,7 @@ import GameMechanics
 import System.Console.GetOpt
 import System.Environment
 import System.IO
+import GHC.Base (undefined)
 
 data Flag = Help | WinnerFlag | Verbose | Interactive | MoveFlag String | Depth String deriving (Show, Eq) 
 
@@ -49,7 +50,6 @@ checkVerbose :: [Flag] -> Bool
 checkVerbose [] = False
 checkVerbose (Verbose:flags) = True
 checkVerbose (f:flags) = checkVerbose flags
-
 
 -- Checks if a move is present and if it is returns that move, else return Nothing 
 getMove :: [Flag] -> Int --should I return this to a maybe?

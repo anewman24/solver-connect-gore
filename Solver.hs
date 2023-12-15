@@ -3,6 +3,7 @@ module Solver where
 import Data.List
 import Data.Maybe
 import GameMechanics
+import Data.Conduit.Lift (maybeC)
 
 
 whoWillWin :: Game -> Winner -- checks the current state of the game, if there is no winner or tie it passes through oneMoveAway
@@ -47,15 +48,40 @@ bestMove game@(board,turn) =
                     Just move -> Just move
                     Nothing -> Just (snd(head possibleResults))
 
--- whoMightWin is supposed to be another version of whoWillWin/bestMove that takes an int as a cut off parameter/ depth to recurse over the possible boards
--- a tmp rateGame was used to test whoMightWin
+
+--rateGame should return a postive value if it good for player one and 
+  --negative value for player two
 rateGame :: Game -> Int
-rateGame game = 
-    case findWinner game of
-        Just (Win Red) -> 1000000
-        Just (Win Yellow) -> -100000
-        Just (Tie) -> 0
-        Nothing -> 0
+rateGame ((x:xs),cp) 
+  |rateFour Red (x:xs) = 1
+  |rateFour Yellow (x:xs) = -1
+  |otherwise = 0
+
+    
+
+--maybeColor :: Color -> Maybe Color
+--maybeColor Red = Just Red
+--maybeColor Yellow = Just Yellow
+
+--maybeBoard :: Board -> [[Maybe Color]]
+--maybeBoard (x:xs) = [map maybeColor y | y <- x]
+
+
+rateFour :: Color -> Board -> Bool
+rateFour col (v:w:x:y:zs) = 
+  aux (reverse v) (reverse w) (reverse x) (reverse y)
+  ||aux (drop 3 $ reverse v) (drop 2 $ reverse w) (drop 1 $ reverse x) (reverse y) 
+  || aux (reverse v) (drop 1 $ reverse w) (drop 2 $ reverse x) (drop 3 $ reverse y)
+  || rateFour col (w:x:y:zs)
+  where aux (v:vs) (w:ws) (x:xs) (y:ys) =
+          all (==col) [v,w,x,y] || aux vs ws xs ys
+        aux _ _ _ _ = False
+rateFour col columns = False
+
+
+
+
+
 
 
 whoMightWin :: Game -> Int -> (Rating, Move)
@@ -71,6 +97,4 @@ whoMightWin game@(board,turn) int =
                     else minimum possibleResults
           in goodMove
           
-
-    
 
