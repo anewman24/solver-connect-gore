@@ -27,7 +27,6 @@ type Move = Int
 -- Idea is to have board and which player's turn it is (maybe include number of moves?)
 type Game = (Board, Color)
 
-
 type Rating = Int -- used for rateGame, can be positive or negative
 
 
@@ -61,10 +60,7 @@ winAcross col (w:x:y:z:as) =
           
 winAcross color columns = False
 
-opposite :: Color -> Color
-opposite Red = Yellow
-opposite Yellow =  Red
-
+-- When given a game, will find a winner or tie if there is one, or will return Nothing if not
 findWinner :: Game -> Maybe Winner
 findWinner (board, currentPlayer) 
        | anyWin Red board = Just $ Win Red 
@@ -84,7 +80,7 @@ swapColor :: Color -> Color
 swapColor Red = Yellow
 swapColor Yellow = Red
 
--- Takes a board, a move, and a color and returns a updates board
+-- Takes a board, a move, and a color and returns an updated board
 makeNewBoard :: Board -> Move -> Color -> Board
 makeNewBoard board move color = 
     let (left, (b:bs)) = splitAt move board
@@ -108,9 +104,6 @@ allowedMoves (b,c) = let spotsLeft = [6 - (length col)|col <-b]
                            [col | (left,col) <- zipSpots, left /= 0]  
 
 
-{- allowedMoves sampleGame = [0, 1, 2, 4, 5, 6]
-       I guess that means it works but what does it mean?
--}
 
 -- Converts a Color type into its String representation
 showCell :: Maybe Color -> String

@@ -1,4 +1,3 @@
-
 module Solver where
 import Data.List
 import Data.Maybe
@@ -96,5 +95,3 @@ whoMightWin game@(board,turn) int =
                     then maximum possibleResults
                     else minimum possibleResults
           in goodMove
-          
-
