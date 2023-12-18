@@ -9,3 +9,39 @@ Audrey Newman
 
 Description:
 This is our groups implementation of Connect Four.
+
+# Project Grade:         83/100
+## Functionality               57/73
+* Game mechanics:              16/20
+  * Had to fix up some merge problems, and merge additional branches, to get most of the
+    functionality in.
+  * You don't have test games printed out (exampleGame doesn't work). had to print from testInputs
+ 
+* Exact game solver:           15/15
+  * Who will win does seem to work, when I create test games with some depth.
+* Cut-off depth solver:        10/13
+  * doesn't seem to solve simpleWhoWillWin game
+  * doesn't check if the game has been won!
+* Evaluation function:         0/2 
+  * looks like this didn't get finished.
+* Avoiding unnecessary work:   0/3
+* Command-line interface:      10/10
+  * the two kinds of showGame are flipped, but otherwise works great.
+* Move and verbose flags:      4/5
+  * -m works great
+  * -v on -m is flipped, but present
+* Error-handling:              2/5
+  * no error checking on readGame and whoMightWin, but exists on updateGame and bestMove.
+
+## Design                      26/27
+  * Overall incredibly well decomposed and beautifully written. Great comments throughout.
+  * Some unsafe pattern matching in makeNewboard, the zip in allowedMove is awkward, 
+  * You sometimes use unnecessary cases (that could be pattern matching on inputs or pulled into a
+    single case).
+  * This is a code base that would be a joy to maintain going forward.
+* Well-designed data types:    8
+* Well-decomposed functions:   10
+* Good module decomposition:   2
+  * The show functions are awkward in main, but at least not in game mechanics.
+* Good variable names:         2
+* Efficient/idiomatic code:    5
